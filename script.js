@@ -23,7 +23,7 @@ function addBooktoLibrary(book) {
 
 // Stores the information associated with a book.
 function storeBookInfo() {
-    
+
 }
 
 // Creates a div to be associated with a book.
@@ -39,7 +39,7 @@ function getBookInfo() {
 
 // Removes a book from the library. 
 function removeBookFromLibrary() {
-
+    library.pop(book)
 }
 
 // Removes the div associated with the book.
