@@ -2,10 +2,15 @@ let library = []
 
 // Sets event listeners for buttons
 function setEventListeners() {
-    let newBtn = document.querySelector("newBook")
+    let newBtn = document.querySelector("#new-book-btn")
     newBtn.addEventListener("click", showForm)
 }
 
+// Shows a form for user to input book information.
+function showForm() {
+    let form = document.querySelector("#new-book-form")
+    form.style.visiblity = "visible"
+}
 
 // Defines a Book object
 function Book(title, author, genre, numPages) {

@@ -8,5 +8,12 @@
     display: flex;
 }
 
+#new-book-form {
+    position: absolute;
+    visibility: hidden;
+}
+
+
+
 
 
