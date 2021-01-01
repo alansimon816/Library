@@ -1,5 +1,12 @@
 let library = []
 
+// Sets event listeners for buttons
+function setEventListeners() {
+    let newBtn = document.querySelector("newBook")
+    newBtn.addEventListener("click", showForm)
+}
+
+
 // Defines a Book object
 function Book(title, author, genre, numPages) {
     this.title = title
@@ -29,7 +36,8 @@ function storeBookInfo() {
 // Creates a div to be associated with a book.
 // Adds a data-attribute for index of book in library to the DOM element.
 function createBookDiv() {
-
+    let div = document.createElement("DIV")
+    document.getElementById("flex-box").appendChild(div)
 }
 
 // Removes a book from the library. 
