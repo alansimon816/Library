@@ -32,11 +32,6 @@ function createBookDiv() {
 
 }
 
-// Returns the information associated with a book.
-function getBookInfo() {
-
-}
-
 // Removes a book from the library. 
 function removeBookFromLibrary() {
     library.pop(book)
