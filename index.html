@@ -7,19 +7,28 @@
     </head>
 
     <body>
-        </div id="outermost-div">
+        <div id="outermost-div">
             <h1>My Library</h1>
-            <form id="new-book-form">
-                <input type="text" name="title">
-                <input type="text" name="author">
-                <input type="text" name="genre">
-                <input type="text" name="pages">
-            </form>
             <button id="new-book-btn">New +</button>
             <div id=flex-box>
 
                 <!-- Content -->
             </div>
-        <div>
+        </div>
+
+        <div id="form-container">
+            <form id="new-book-form">
+                <label for="title-in">Title</label>
+                <input id="title-in" type="text" name="title">
+                <label for="author-in">Author</label>
+                <input id="author-in" type="text" name="author">
+                <label for="genre-in">Genre</label>
+                <input id="genre-in" type="text" name="genre">
+                <label for="pages-in">Number of Pages</label>
+                <input id="pages-in" type="text" name="pages"> 
+                <input type="Submit">
+            </form>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>

@@ -1,15 +1,19 @@
+const newBtn = document.getElementById('new-book-btn')
+
+
 let library = []
+
+setEventListeners()
 
 // Sets event listeners for buttons
 function setEventListeners() {
-    let newBtn = document.querySelector("#new-book-btn")
-    newBtn.addEventListener("click", showForm)
+    newBtn.addEventListener('click', showForm)
 }
 
 // Shows a form for user to input book information.
 function showForm() {
-    let form = document.querySelector("#new-book-form")
-    form.style.visiblity = "visible"
+    let form = document.getElementById('new-book-form')
+    form.style.visibility = 'visible'
 }
 
 // Defines a Book object
@@ -41,8 +45,8 @@ function storeBookInfo() {
 // Creates a div to be associated with a book.
 // Adds a data-attribute for index of book in library to the DOM element.
 function createBookDiv() {
-    let div = document.createElement("DIV")
-    document.getElementById("flex-box").appendChild(div)
+    let div = document.createElement('DIV')
+    document.getElementById('flex-box').appendChild(div)
 }
 
 // Removes a book from the library. 

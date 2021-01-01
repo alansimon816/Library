@@ -9,11 +9,36 @@
 }
 
 #new-book-form {
-    position: absolute;
     visibility: hidden;
 }
 
+body {
+    height: 100vh;
+    width: 100vw;
+}
 
+#new-book-btn {
+    width: 5%;
+    align-self: flex-end;
+}
+
+#outermost-div, #form-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#form-container {
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#new-book-form {
+    display: flex;
+    flex-direction: column;
+}
 
 
 
