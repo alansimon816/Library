@@ -1,5 +1,5 @@
 const newBtn = document.getElementById('new-book-btn')
-
+const submitBtn = document.getElementById('submit-btn')
 
 let library = []
 
@@ -8,6 +8,7 @@ setEventListeners()
 // Sets event listeners for buttons
 function setEventListeners() {
     newBtn.addEventListener('click', showForm)
+    submitBtn.addEventListener('click', addBooktoLibrary)
 }
 
 // Shows a form for user to input book information.
@@ -32,8 +33,13 @@ Book.prototype.getInfo = function () {
             `Number of Pages: ${this.numPages}\n`        
 }
 
-// Adds a book to the library array 
-function addBooktoLibrary(book) {
+// Creates a book object and adds a book to the library array 
+function addBooktoLibrary() {
+    let title = document.getElementById('title-in').value
+    let author = document.getElementById('author-in').value
+    let genre = document.getElementById('genre-in').value
+    let numPages = document.getElementById('pages-in').value
+    let book = new Book(title, author, genre, numPages)
     library.push(book)    
 }
 
