@@ -10,6 +10,7 @@ setEventListeners()
 function setEventListeners() {
     newBtn.addEventListener('click', showForm)
     form.addEventListener('submit', addBookToLibrary)
+    exitFormBtn.addEventListener('click', exitNewBookForm)
 }
 
 // Shows a form for user to input book information.
@@ -17,6 +18,14 @@ function showForm() {
     let form = document.getElementById('new-book-form')
     form.style.visibility = 'visible'
 }
+
+// Exits the new book form.
+function exitNewBookForm() {
+    form.reset()
+    form.style.visibility = 'hidden'
+}
+
+// Exits the fo
 
 // Defines a Book object
 function Book(title, author, genre, numPages) {
