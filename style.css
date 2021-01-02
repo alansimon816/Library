@@ -68,5 +68,12 @@ body {
     border: solid;
 }
 
+#exit-form-btn {
+    background: red;
+    color: white;
+    margin-left: 90%;
+    float: right;
+}
+
 
 

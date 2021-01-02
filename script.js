@@ -1,5 +1,6 @@
 const newBtn = document.getElementById('new-book-btn')
 const form = document.getElementById('new-book-form')
+const exitFormBtn = document.getElementById('exit-form-btn')
 
 let library = []
 
