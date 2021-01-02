@@ -44,8 +44,19 @@ body {
 }
 
 #new-book-form {
+    background: whitesmoke;
+    padding: 1%;
+    border: solid;
+    border-color: black;
     display: flex;
     flex-direction: column;
+}
+
+#new-book-form > input {
+    margin-top: 2%;
+    margin-bottom:2%;
+    /* margin-right: 10%;
+    margin-left: 10%; */
 }
 
 .bookCard {
