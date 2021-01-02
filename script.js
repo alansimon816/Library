@@ -30,7 +30,7 @@ Book.prototype.getInfo = function () {
     return `Title: ${this.title}\n` + 
             `Author: ${this.author}\n` +
             `Genre: ${this.genre}\n` +
-            `Number of Pages: ${this.numPages}\n`        
+            `# of Pages: ${this.numPages}\n`        
 }
 
 // Creates a book object and adds a book to the library array 
@@ -60,9 +60,13 @@ function createBookDiv(book) {
     let div = document.createElement('DIV')
     div.dataset.index = library.indexOf(book)
     div.className = 'bookCard'
-    let node = document.createTextNode(book.getInfo())
     let p = document.createElement('P')
-    p.appendChild(node)
+    let text = book.getInfo().replace(/\n/g, '<br />')
+    text = text.replace('Title', '<b>Title</b>')
+    text = text.replace('Author', '<b>Author</b>')
+    text = text.replace('Genre', '<b>Genre</b>')
+    text = text.replace('# of Pages', '<b># of Pages</b>')
+    p.innerHTML = text
     div.appendChild(p)
     document.getElementById('flex-box').appendChild(div)
 }
