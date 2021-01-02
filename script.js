@@ -1,16 +1,32 @@
 const newBtn = document.getElementById('new-book-btn')
 const form = document.getElementById('new-book-form')
 const exitFormBtn = document.getElementById('exit-form-btn')
+const titleInput = document.getElementById('title-in')
+const authorInput = document.getElementById('author-in')
+const genreInput = document.getElementById('genre-in')
+const pagesInput = document.getElementById('pages-in')
 
 let library = []
 
 setEventListeners()
 
-// Sets event listeners for buttons
+// Sets event listeners for buttons and inputs.
 function setEventListeners() {
     newBtn.addEventListener('click', showForm)
     form.addEventListener('submit', addBookToLibrary)
     exitFormBtn.addEventListener('click', exitNewBookForm)
+    titleInput.addEventListener('keydown', exitFocus)
+    authorInput.addEventListener('keydown', exitFocus)
+    genreInput.addEventListener('keydown', exitFocus)
+    pagesInput.addEventListener('keydown', exitFocus)
+}
+
+// Undos the focus on the focused input.
+function exitFocus(e) {
+    if (e.code === 'Enter') {
+        let element = e.target
+        element.blur()   
+    }
 }
 
 // Shows a form for user to input book information.
@@ -24,8 +40,6 @@ function exitNewBookForm() {
     form.reset()
     form.style.visibility = 'hidden'
 }
-
-// Exits the fo
 
 // Defines a Book object
 function Book(title, author, genre, numPages) {
