@@ -1,5 +1,5 @@
 const newBtn = document.getElementById('new-book-btn')
-const submitBtn = document.getElementById('submit-btn')
+const form = document.getElementById('new-book-form')
 
 let library = []
 
@@ -8,7 +8,7 @@ setEventListeners()
 // Sets event listeners for buttons
 function setEventListeners() {
     newBtn.addEventListener('click', showForm)
-    submitBtn.addEventListener('click', addBooktoLibrary)
+    form.addEventListener('submit', addBookToLibrary)
 }
 
 // Shows a form for user to input book information.
@@ -34,13 +34,19 @@ Book.prototype.getInfo = function () {
 }
 
 // Creates a book object and adds a book to the library array 
-function addBooktoLibrary() {
+function addBookToLibrary(e) {
+    // prevents default browser behavior (page refresh)
+    e.preventDefault();
     let title = document.getElementById('title-in').value
     let author = document.getElementById('author-in').value
     let genre = document.getElementById('genre-in').value
     let numPages = document.getElementById('pages-in').value
     let book = new Book(title, author, genre, numPages)
-    library.push(book)    
+    library.push(book) 
+    console.log(library[library.length - 1].getInfo())
+    form.reset()
+    form.style.visibility = 'hidden'
+    createBookDiv(book)
 }
 
 // Stores the information associated with a book.
@@ -50,8 +56,14 @@ function storeBookInfo() {
 
 // Creates a div to be associated with a book.
 // Adds a data-attribute for index of book in library to the DOM element.
-function createBookDiv() {
+function createBookDiv(book) {
     let div = document.createElement('DIV')
+    div.dataset.index = library.indexOf(book)
+    div.className = 'bookCard'
+    let node = document.createTextNode(book.getInfo())
+    let p = document.createElement('P')
+    p.appendChild(node)
+    div.appendChild(p)
     document.getElementById('flex-box').appendChild(div)
 }
 

@@ -5,7 +5,10 @@
 }
 
 #flex-box {
+    height: 90%;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
 }
 
 #new-book-form {
@@ -38,6 +41,14 @@ body {
 #new-book-form {
     display: flex;
     flex-direction: column;
+}
+
+.bookCard {
+    height: 25%;
+    width: 10%;
+    padding: 1%;
+    margin: 5%;
+    border: solid;
 }
 
 
