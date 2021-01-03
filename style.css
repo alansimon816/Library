@@ -15,7 +15,7 @@ h1 {
     flex-wrap: wrap;
 }
 
-#new-book-form {
+#new-book-form, #edit-book-form {
     visibility: hidden;
 }
 
@@ -43,7 +43,8 @@ body {
     align-items: center;
 }
 
-#new-book-form {
+#new-book-form, #edit-book-form {
+    position: absolute;
     background: whitesmoke;
     padding: 1%;
     border: solid;
@@ -52,7 +53,7 @@ body {
     flex-direction: column;
 }
 
-#new-book-form > input {
+#new-book-form > input, #edit-book-form > input {
     margin-top: 2%;
     margin-bottom:2%;
 }
@@ -73,7 +74,7 @@ body {
     bottom: 3%;
 }
 
-#exit-form-btn {
+#exit-form-btn, #exit-edit-form-btn {
     background: red;
     color: white;
     margin-left: 90%;
