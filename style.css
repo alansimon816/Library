@@ -15,7 +15,11 @@ h1 {
     flex-wrap: wrap;
 }
 
-#new-book-form, #edit-book-form {
+#new-book-form {
+    visibility: hidden;
+}
+
+#edit-book-form {
     visibility: hidden;
 }
 
@@ -30,7 +34,7 @@ body {
     align-self: flex-end;
 }
 
-#outermost-div, #form-container {
+#outermost-div, #form-container, #edit-form-container {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -38,6 +42,13 @@ body {
 
 #form-container {
     visibility: hidden;
+}
+
+#edit-form-container {
+    visibility: hidden;
+}
+
+#form-container, #edit-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,6 +90,11 @@ body {
     color: white;
     margin-left: 90%;
     float: right;
+}
+
+#edit-form-buttons {
+    display: flex;
+    justify-content: space-between;
 }
 
 

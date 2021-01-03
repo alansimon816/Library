@@ -1,5 +1,6 @@
 const newBtn = document.getElementById('new-book-btn')
 const form = document.getElementById('new-book-form')
+const editForm = document.getElementById('edit-book-form')
 const exitFormBtn = document.getElementById('exit-form-btn')
 const titleInput = document.getElementById('title-in')
 const authorInput = document.getElementById('author-in')
@@ -89,7 +90,13 @@ function createBookDiv(book) {
     div.appendChild(p)
     div.addEventListener('mouseenter', jump)
     div.addEventListener('mouseleave', land)
+    div.addEventListener('click', showEditForm)
     document.getElementById('flex-box').appendChild(div)
+}
+
+// Shows a form for editing/deleting the book that was clicked on.
+function showEditForm(e) {
+    editForm.style.visibility = 'visible'
 }
 
 // Offsets an element vertically, thereby making it "jump."

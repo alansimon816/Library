@@ -28,7 +28,10 @@
                 <label for="pages-in">Number of Pages</label>
                 <input id="pages-in" type="number" name="pages" min="1"> 
                 <input id="submit-btn" type="submit">
-            </form id="edit-book-form">
+            </form>
+        </div>
+        <div id="edit-form-container">
+            <form id="edit-book-form">
                 <button id="exit-edit-form-btn">X</button>
                 <label for="title-edit-in">Title</label>
                 <input id="title-edit-in" type="text" name="title" required>
@@ -37,14 +40,14 @@
                 <label for="genre-edit-in">Genre</label>
                 <input id="genre-edit-in" type="text" name="genre">
                 <label for="pages-edit-in">Number of Pages</label>
-                <input id="pages-edit-in" type="number" name="pages" min="1"> 
-                <input id="submit-edit-btn" type="submit">
-            <form>
-
+                <input id="pages-edit-in" type="number" name="pages" min="1">
+                <div id="edit-form-buttons"> 
+                    <input id="submit-edit-btn" type="submit" value="Edit">
+                    <button id="delete-btn">Delete</button>
+                </div>
             </form>
         </div>
-
-        <div id="form-contaui">
+        
         <script src="script.js"></script>
     </body>
 </html>
