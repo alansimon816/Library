@@ -39,9 +39,17 @@ body {
 }
 
 #outermost-div, #form-container, #edit-form-container {
-    position: absolute;
     height: 100%;
     width: 100%;
+    z-index: 1;
+}
+
+#outermost-div, #form-container, #edit-form-container, #selected-book-flex-box {
+    position: absolute;
+}
+
+#selected-book-flex-box {
+    z-index: 0;
 }
 
 #form-container {
@@ -91,12 +99,13 @@ body {
     /* position: absolute; */
 }
 
-#selected-book-buttons {
+#selected-book-main-btns {
     display: flex;
     justify-content: space-between;
 }
 
 #selected-book-flex-box {
+    position: absolute;
     height: 90%;
     width: 100%;
     display: flex;
@@ -109,7 +118,7 @@ body {
     bottom: 3%;
 }
 
-#exit-form-btn, #exit-edit-form-btn {
+#exit-form-btn, #exit-edit-form-btn, #exit-selected-book-btn {
     background: red;
     color: white;
     margin-left: 90%;

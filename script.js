@@ -3,6 +3,7 @@ const form = document.getElementById('new-book-form')
 const editForm = document.getElementById('edit-book-form')
 const exitFormBtn = document.getElementById('exit-form-btn')
 const exitEditFormBtn = document.getElementById('exit-edit-form-btn')
+const exitSelectedBookBtn = document.getElementById('exit-selected-book-btn')
 const deleteBtn = document.getElementById('delete-btn')
 const deleteWarning = document.getElementById('delete-warning-container')
 const titleInput = document.getElementById('title-in')
@@ -20,6 +21,7 @@ function setEventListeners() {
     form.addEventListener('submit', addBookToLibrary)
     exitFormBtn.addEventListener('click', exitNewBookForm)
     exitEditFormBtn.addEventListener('click', exitEditBookForm)
+    exitSelectedBookBtn.addEventListener('click',exitSelectedBook)
     deleteBtn.addEventListener('click', showDeleteWarning)
     titleInput.addEventListener('keydown', exitFocus)
     authorInput.addEventListener('keydown', exitFocus)
@@ -54,6 +56,7 @@ function exitFocus(e) {
 // Shows the selected book in the middle of the screen.
 function showSelectedBook(e) {
     let selectedBook = document.getElementById('selected-book')
+    let selectedBookContainer = document.getElementById('selected-book-flex-box')
     let p
     console.log(e.target.nodeName + ' clicked.')
 
@@ -71,7 +74,8 @@ function showSelectedBook(e) {
 
     console.log(p)
 
-    selectedBook.insertBefore(p, selectedBook.firstChild)
+    selectedBook.insertBefore(p, selectedBook.querySelector('#selected-book-main-btns'))
+    selectedBookContainer.style.zIndex = 2
     selectedBook.style.visibility = 'visible'
 }
 
@@ -104,6 +108,15 @@ function exitEditBookForm() {
     editForm.style.visibility = 'hidden'
 }
 
+// Exits the selected book.
+function exitSelectedBook() {  
+    let selectedBook = document.getElementById('selected-book')
+    let selectedBookContainer = document.getElementById('selected-book-flex-box') 
+    let p = selectedBook.querySelector('P') 
+    selectedBookContainer.style.zIndex = 0
+    selectedBook.style.visibility = 'hidden'
+    selectedBook.removeChild(p)
+}
 // Creates a book object and adds a book to the library array 
 function addBookToLibrary(e) {
     // prevents default browser behavior (page refresh)
