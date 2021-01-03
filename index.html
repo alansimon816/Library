@@ -42,10 +42,22 @@
                 <label for="pages-edit-in">Number of Pages</label>
                 <input id="pages-edit-in" type="number" name="pages" min="1">
                 <div id="edit-form-buttons"> 
-                    <input id="submit-edit-btn" type="submit" value="Edit">
-                    <button id="delete-btn">Delete</button>
+                    <input id="submit-edit-btn" type="submit">
                 </div>
             </form>
+        </div>
+        <div id="selected-book-flex-box">
+            <div id="selected-book">
+                <div id="selected-book-buttons"> 
+                    <button id="edit-btn">Edit</button>
+                    <button id="delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div id="delete-warning-container">
+            <p>Are you sure you want to delete this book?</p>
+            <button>Confirm</button>
+            <button>Cancel</button>
         </div>
         
         <script src="script.js"></script>
@@ -59,3 +71,5 @@
 
      <!-- Disable page interactivity outside of form when a form is being
          shown -->
+
+         <!-- Create a confirmation window when deleting book-->

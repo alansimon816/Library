@@ -3,6 +3,8 @@ const form = document.getElementById('new-book-form')
 const editForm = document.getElementById('edit-book-form')
 const exitFormBtn = document.getElementById('exit-form-btn')
 const exitEditFormBtn = document.getElementById('exit-edit-form-btn')
+const deleteBtn = document.getElementById('delete-btn')
+const deleteWarning = document.getElementById('delete-warning-container')
 const titleInput = document.getElementById('title-in')
 const authorInput = document.getElementById('author-in')
 const genreInput = document.getElementById('genre-in')
@@ -18,6 +20,7 @@ function setEventListeners() {
     form.addEventListener('submit', addBookToLibrary)
     exitFormBtn.addEventListener('click', exitNewBookForm)
     exitEditFormBtn.addEventListener('click', exitEditBookForm)
+    deleteBtn.addEventListener('click', showDeleteWarning)
     titleInput.addEventListener('keydown', exitFocus)
     authorInput.addEventListener('keydown', exitFocus)
     genreInput.addEventListener('keydown', exitFocus)
@@ -48,10 +51,45 @@ function exitFocus(e) {
     }
 }
 
+// Shows the selected book in the middle of the screen.
+function showSelectedBook(e) {
+    let selectedBook = document.getElementById('selected-book')
+    let p
+    console.log(e.target.nodeName + ' clicked.')
+
+    if (e.target.nodeName === 'P' || e.target.nodeName === 'B') {
+        e.stopPropagation()
+    }
+
+    if (e.target.nodeName === 'P') {
+        p = e.target.cloneNode(true)
+    } else if (e.target.nodeName === 'B') {
+        p = e.target.parentNode.cloneNode(true)
+    } else {
+        p = e.target.querySelector('p').cloneNode(true)
+    }
+
+    console.log(p)
+
+    selectedBook.insertBefore(p, selectedBook.firstChild)
+    selectedBook.style.visibility = 'visible'
+}
+
 // Shows a form for user to input book information.
 function showForm() {
     let form = document.getElementById('new-book-form')
     form.style.visibility = 'visible'
+}
+
+// Shows a form for editing/deleting the book that was clicked on.
+function showEditForm(e) {
+    editForm.style.visibility = 'visible'
+}
+
+// Displays a window containing a message that questions
+// whether user is sure that they want to delete the book or not.
+function showDeleteWarning() {
+    deleteWarning.visibility = 'visible'
 }
 
 // Exits the new book form.
@@ -95,16 +133,12 @@ function createBookDiv(book) {
     text = text.replace('Genre', '<b>Genre</b>')
     text = text.replace('# of Pages', '<b># of Pages</b>')
     p.innerHTML = text
+    // p.addEventListener('click', showSelected)
     div.appendChild(p)
     div.addEventListener('mouseenter', jump)
     div.addEventListener('mouseleave', land)
-    div.addEventListener('click', showEditForm)
+    div.addEventListener('click', showSelectedBook)
     document.getElementById('flex-box').appendChild(div)
-}
-
-// Shows a form for editing/deleting the book that was clicked on.
-function showEditForm(e) {
-    editForm.style.visibility = 'visible'
 }
 
 // Offsets an element vertically, thereby making it "jump."
