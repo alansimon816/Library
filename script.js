@@ -87,8 +87,22 @@ function createBookDiv(book) {
     text = text.replace('# of Pages', '<b># of Pages</b>')
     p.innerHTML = text
     div.appendChild(p)
+    div.addEventListener('mouseenter', jump)
+    div.addEventListener('mouseleave', land)
     document.getElementById('flex-box').appendChild(div)
 }
+
+// Offsets an element vertically, thereby making it "jump."
+function jump(e) {
+    let element = e.target
+    element.classList.add("jump")
+}
+
+// Undoes the operation performed in jump().
+function land(e) {
+    let element = e.target
+    element.classList.remove("jump")
+} 
 
 // Removes the div associated with the book, updates data-index attributes,
 // removes the book from library.
