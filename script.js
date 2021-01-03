@@ -2,6 +2,7 @@ const newBtn = document.getElementById('new-book-btn')
 const form = document.getElementById('new-book-form')
 const editForm = document.getElementById('edit-book-form')
 const exitFormBtn = document.getElementById('exit-form-btn')
+const exitEditFormBtn = document.getElementById('exit-edit-form-btn')
 const titleInput = document.getElementById('title-in')
 const authorInput = document.getElementById('author-in')
 const genreInput = document.getElementById('genre-in')
@@ -16,6 +17,7 @@ function setEventListeners() {
     newBtn.addEventListener('click', showForm)
     form.addEventListener('submit', addBookToLibrary)
     exitFormBtn.addEventListener('click', exitNewBookForm)
+    exitEditFormBtn.addEventListener('click', exitEditBookForm)
     titleInput.addEventListener('keydown', exitFocus)
     authorInput.addEventListener('keydown', exitFocus)
     genreInput.addEventListener('keydown', exitFocus)
@@ -56,6 +58,12 @@ function showForm() {
 function exitNewBookForm() {
     form.reset()
     form.style.visibility = 'hidden'
+}
+
+// Exits the edit book form.
+function exitEditBookForm() {
+    editForm.reset()
+    editForm.style.visibility = 'hidden'
 }
 
 // Creates a book object and adds a book to the library array 
