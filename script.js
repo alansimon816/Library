@@ -4,6 +4,7 @@ const editForm = document.getElementById('edit-book-form')
 const exitFormBtn = document.getElementById('exit-form-btn')
 const exitEditFormBtn = document.getElementById('exit-edit-form-btn')
 const exitSelectedBookBtn = document.getElementById('exit-selected-book-btn')
+const editBtn = document.getElementById('edit-btn')
 const deleteBtn = document.getElementById('delete-btn')
 const confirmDeleteBtn = document.getElementById('delete-confirm')
 const cancelDeleteBtn = document.getElementById('delete-cancel')
@@ -21,9 +22,11 @@ setEventListeners()
 function setEventListeners() {
     newBtn.addEventListener('click', showForm)
     form.addEventListener('submit', addBookToLibrary)
+    editForm.addEventListener('submit', editBookInLibrary)
     exitFormBtn.addEventListener('click', exitNewBookForm)
     exitEditFormBtn.addEventListener('click', exitEditBookForm)
     exitSelectedBookBtn.addEventListener('click',exitSelectedBook)
+    editBtn.addEventListener('click', showEditForm)
     deleteBtn.addEventListener('click', showDeleteWarning)
     cancelDeleteBtn.addEventListener('click', exitDeleteWarning)
     confirmDeleteBtn.addEventListener('click', removeBook)
@@ -90,13 +93,31 @@ function showSelectedBook(e) {
 
 // Shows a form for user to input book information.
 function showForm() {
-    let form = document.getElementById('new-book-form')
     form.style.visibility = 'visible'
 }
 
 // Shows a form for editing/deleting the book that was clicked on.
 function showEditForm(e) {
+    fillEditForm()
+    let editFormContainer = document.getElementById('edit-form-container')
+    editFormContainer.style.zIndex = 3
     editForm.style.visibility = 'visible'
+}
+
+// Fills the fields of the edit form with the information of the book
+// being edited.
+function fillEditForm() {
+    let selectedBook = document.getElementById('selected-book')
+    let titleInput = document.getElementById('title-edit-in')
+    let authorInput = document.getElementById('author-edit-in')
+    let genreInput = document.getElementById('genre-edit-in')
+    let pagesInput = document.getElementById('pages-edit-in')
+    let i = selectedBook.dataset.index
+
+    titleInput.value = library[i].title
+    authorInput.value = library[i].author
+    genreInput.value = library[i].genre
+    pagesInput.value = library[i].numPages   
 }
 
 // Displays a window containing a message that questions
@@ -153,6 +174,24 @@ function addBookToLibrary(e) {
     createBookDiv(book)
 }
 
+// Updates the information associated with a book that exists in library array
+function editBookInLibrary(e) {
+    e.preventDefault();
+    let selectedBook = document.getElementById('selected-book')
+    let i = selectedBook.dataset.index
+    let p = document.querySelector(`div[data-index='${i}'] > p`)
+
+    library[i].title = editForm.querySelector('#title-edit-in').value
+    library[i].author = editForm.querySelector('#author-edit-in').value
+    library[i].genre = editForm.querySelector('#genre-edit-in').value
+    library[i].numPages = editForm.querySelector('#pages-edit-in').value
+
+    p.innerHTML = createBookDivText(library[i]) 
+
+    exitEditBookForm()
+    exitSelectedBook()
+}
+
 // Creates a div to be associated with a book.
 // Adds a data-attribute for index of book in library to the DOM element.
 function createBookDiv(book) {
@@ -160,18 +199,25 @@ function createBookDiv(book) {
     div.dataset.index = library.indexOf(book)
     div.className = 'bookCard'
     let p = document.createElement('P')
-    let text = book.getInfo().replace(/\n/g, '<br /><br />')
-    text = text.replace('Title', '<b>Title</b>')
-    text = text.replace('Author', '<b>Author</b>')
-    text = text.replace('Genre', '<b>Genre</b>')
-    text = text.replace('# of Pages', '<b># of Pages</b>')
-    p.innerHTML = text
+    p.innerHTML = createBookDivText(book)
     // p.addEventListener('click', showSelected)
     div.appendChild(p)
     div.addEventListener('mouseenter', jump)
     div.addEventListener('mouseleave', land)
     div.addEventListener('click', showSelectedBook)
     document.getElementById('flex-box').appendChild(div)
+}
+
+// Creates a string of inner HTML for a child <p></p> with a
+// parent div of class .bookCard. NOTE: this only
+// creates a string, it does not update the actual innerHTML.
+function createBookDivText(book) {
+    let text = book.getInfo().replace(/\n/g, '<br /><br />')
+    text = text.replace('Title', '<b>Title</b>')
+    text = text.replace('Author', '<b>Author</b>')
+    text = text.replace('Genre', '<b>Genre</b>')
+    text = text.replace('# of Pages', '<b># of Pages</b>')
+    return text
 }
 
 // Offsets an element vertically, thereby making it "jump."
@@ -221,12 +267,12 @@ function updateIndexAttributes(idx) {
     }
 }
 
-// Stores the information associated with a book.
+// Stores the information associated with a book (database).
 function storeBookInfo() {
 
 }
 
-// Deletes stored information about the book.
+// Deletes stored information about the book (database).
 function deleteBookInfo() {
 
 }
