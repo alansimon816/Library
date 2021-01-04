@@ -5,7 +5,9 @@ const exitFormBtn = document.getElementById('exit-form-btn')
 const exitEditFormBtn = document.getElementById('exit-edit-form-btn')
 const exitSelectedBookBtn = document.getElementById('exit-selected-book-btn')
 const deleteBtn = document.getElementById('delete-btn')
-const deleteWarning = document.getElementById('delete-warning-container')
+const confirmDeleteBtn = document.getElementById('delete-confirm')
+const cancelDeleteBtn = document.getElementById('delete-cancel')
+const deleteWarning = document.getElementById('delete-warning')
 const titleInput = document.getElementById('title-in')
 const authorInput = document.getElementById('author-in')
 const genreInput = document.getElementById('genre-in')
@@ -23,6 +25,8 @@ function setEventListeners() {
     exitEditFormBtn.addEventListener('click', exitEditBookForm)
     exitSelectedBookBtn.addEventListener('click',exitSelectedBook)
     deleteBtn.addEventListener('click', showDeleteWarning)
+    cancelDeleteBtn.addEventListener('click', exitDeleteWarning)
+    confirmDeleteBtn.addEventListener('click', removeBook)
     titleInput.addEventListener('keydown', exitFocus)
     authorInput.addEventListener('keydown', exitFocus)
     genreInput.addEventListener('keydown', exitFocus)
@@ -58,6 +62,8 @@ function showSelectedBook(e) {
     let selectedBook = document.getElementById('selected-book')
     let selectedBookContainer = document.getElementById('selected-book-flex-box')
     let p
+    let i 
+
     console.log(e.target.nodeName + ' clicked.')
 
     if (e.target.nodeName === 'P' || e.target.nodeName === 'B') {
@@ -65,15 +71,18 @@ function showSelectedBook(e) {
     }
 
     if (e.target.nodeName === 'P') {
+        i = e.target.parentNode.dataset.index
         p = e.target.cloneNode(true)
     } else if (e.target.nodeName === 'B') {
+        i = e.target.parentNode.parentNode.dataset.index
         p = e.target.parentNode.cloneNode(true)
     } else {
+        i = e.target.dataset.index
         p = e.target.querySelector('p').cloneNode(true)
     }
 
     console.log(p)
-
+    selectedBook.dataset.index = i
     selectedBook.insertBefore(p, selectedBook.querySelector('#selected-book-main-btns'))
     selectedBookContainer.style.zIndex = 2
     selectedBook.style.visibility = 'visible'
@@ -93,7 +102,9 @@ function showEditForm(e) {
 // Displays a window containing a message that questions
 // whether user is sure that they want to delete the book or not.
 function showDeleteWarning() {
-    deleteWarning.visibility = 'visible'
+    let warningContainer = document.getElementById('delete-warning-container') 
+    warningContainer.style.zIndex = 3
+    deleteWarning.style.visibility = 'visible'
 }
 
 // Exits the new book form.
@@ -113,9 +124,17 @@ function exitSelectedBook() {
     let selectedBook = document.getElementById('selected-book')
     let selectedBookContainer = document.getElementById('selected-book-flex-box') 
     let p = selectedBook.querySelector('P') 
+
     selectedBookContainer.style.zIndex = 0
     selectedBook.style.visibility = 'hidden'
     selectedBook.removeChild(p)
+}
+
+// Exits the delete warning window.
+function exitDeleteWarning() {
+    let warningContainer = document.getElementById('delete-warning-container')
+    warningContainer.style.zIndex = 0
+    deleteWarning.style.visibility = 'hidden'
 }
 // Creates a book object and adds a book to the library array 
 function addBookToLibrary(e) {
@@ -126,6 +145,7 @@ function addBookToLibrary(e) {
     let genre = document.getElementById('genre-in').value
     let numPages = document.getElementById('pages-in').value
     let book = new Book(title, author, genre, numPages)
+
     library.push(book) 
     console.log(library[library.length - 1].getInfo())
     form.reset()
@@ -168,12 +188,20 @@ function land(e) {
 
 // Removes the div associated with the book, updates data-index attributes,
 // removes the book from library.
-function removeBook(book) {
-    let i = library.indexOf(book)
-    let div = document.querySelector(`div[data-index=${i}]`)
+function removeBook(e) {
+    let i  = document.getElementById('selected-book').dataset.index
+    let div = document.querySelector(`div[data-index='${i}']`)
+
     div.remove();
     updateIndexAttributes(i)
     library.splice(i, 1)
+    exitWindows() 
+}
+
+// Exits stacked windows.
+function exitWindows() {
+    exitDeleteWarning()
+    exitSelectedBook() 
 }
 
 // Updates Data-index attributes of book divs. This function is meant to be 
@@ -182,14 +210,14 @@ function removeBook(book) {
 function updateIndexAttributes(idx) {
     let nodes = document.querySelectorAll('.bookCard')
 
-    if (idx != library.length() - 1) {
-        nodes = [...nodes].filter(node => node.dataset.index > idx)
-    } else if (idx != 0){
+    if (nodes.length === 0 || idx === library.length - 1) {
         return
     }
 
-    for (node in nodes) {
-        node.dataset.index -= 1
+    for (let node of nodes) {
+        if (node.dataset.index > idx) {
+            node.dataset.index -= 1
+        }
     }
 }
 

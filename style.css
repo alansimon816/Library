@@ -24,6 +24,7 @@ h1 {
 }
 
 #delete-warning-container {
+    z-index: 0;
     visibility: hidden;
 }
 
@@ -38,13 +39,18 @@ body {
     align-self: flex-end;
 }
 
-#outermost-div, #form-container, #edit-form-container {
+#outermost-div, #form-container, #edit-form-container,
+#delete-warning-container {
     height: 100%;
     width: 100%;
+}
+
+#outermost-div, #form-container, #edit-form-container {
     z-index: 1;
 }
 
-#outermost-div, #form-container, #edit-form-container, #selected-book-flex-box {
+#outermost-div, #form-container, #edit-form-container,
+#selected-book-flex-box, #delete-warning-container {
     position: absolute;
 }
 
@@ -60,13 +66,13 @@ body {
     visibility: hidden;
 }
 
-#form-container, #edit-form-container {
+#form-container, #edit-form-container, #delete-warning-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#new-book-form, #edit-book-form, #delete-warning-container {
+#new-book-form, #edit-book-form, #delete-warning {
     position: absolute;
     background: whitesmoke;
     padding: 1%;
@@ -128,6 +134,15 @@ body {
 #edit-form-buttons {
     display: flex;
     justify-content: space-between;
+}
+
+#delete-warning-btns {
+    display: flex;
+    justify-content: space-around;
+}
+
+#delete-msg {
+    padding: 5%;
 }
 
 
