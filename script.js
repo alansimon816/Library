@@ -102,6 +102,7 @@ function showEditForm(e) {
     let editFormContainer = document.getElementById('edit-form-container')
     editFormContainer.style.zIndex = 3
     editForm.style.visibility = 'visible'
+    preventBackgroundPointerEvents()
 }
 
 // Fills the fields of the edit form with the information of the book
@@ -126,6 +127,7 @@ function showDeleteWarning() {
     let warningContainer = document.getElementById('delete-warning-container') 
     warningContainer.style.zIndex = 3
     deleteWarning.style.visibility = 'visible'
+    preventBackgroundPointerEvents()
 }
 
 // Exits the new book form.
@@ -138,6 +140,7 @@ function exitNewBookForm() {
 function exitEditBookForm() {
     editForm.reset()
     editForm.style.visibility = 'hidden'
+    allowPointerEvents()
 }
 
 // Exits the selected book.
@@ -156,6 +159,7 @@ function exitDeleteWarning() {
     let warningContainer = document.getElementById('delete-warning-container')
     warningContainer.style.zIndex = 0
     deleteWarning.style.visibility = 'hidden'
+    allowPointerEvents()
 }
 // Creates a book object and adds a book to the library array 
 function addBookToLibrary(e) {
@@ -265,6 +269,25 @@ function updateIndexAttributes(idx) {
             node.dataset.index -= 1
         }
     }
+}
+
+// Prevents interaction with #outermost-div and #selected-book-container
+// elements that are in the background while another element is in the
+// foreground.
+function preventBackgroundPointerEvents() {
+    let selectedBookFlexBox = document.getElementById('selected-book-flex-box')
+    let outermostDiv = document.getElementById('outermost-div')
+    outermostDiv.style.pointerEvents = 'none'
+    selectedBookFlexBox.style.pointerEvents = 'none'
+}
+
+// Allows for interaction with #outermost-div and #selected-book-container
+// elements.
+function allowPointerEvents() {
+    let selectedBookFlexBox = document.getElementById('selected-book-flex-box')
+    let outermostDiv = document.getElementById('outermost-div')
+    outermostDiv.style.pointerEvents = 'auto'
+    selectedBookFlexBox.style.pointerEvents = 'auto'
 }
 
 // Stores the information associated with a book (database).
