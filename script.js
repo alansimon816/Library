@@ -163,7 +163,6 @@ function exitDeleteWarning() {
 }
 // Creates a book object and adds a book to the library array 
 function addBookToLibrary(e) {
-    // prevents default browser behavior (page refresh)
     e.preventDefault();
     let title = document.getElementById('title-in').value
     let author = document.getElementById('author-in').value
@@ -204,7 +203,6 @@ function createBookDiv(book) {
     card.className = 'bookCard'
     let p = document.createElement('P')
     p.innerHTML = createBookDivText(book)
-    // p.addEventListener('click', showSelected)
     card.appendChild(p)
     card.addEventListener('mouseenter', jump)
     card.addEventListener('mouseleave', land)
