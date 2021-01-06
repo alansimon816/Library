@@ -32,7 +32,7 @@
         </div>
         <div id="edit-form-container">
             <form id="edit-book-form">
-                <button id="exit-edit-form-btn">X</button>
+                <button id="exit-edit-form-btn" type="button">X</button>
                 <label for="title-edit-in">Title</label>
                 <input id="title-edit-in" type="text" name="title" required>
                 <label for="author-edit-in">Author</label>
@@ -42,7 +42,7 @@
                 <label for="pages-edit-in">Number of Pages</label>
                 <input id="pages-edit-in" type="number" name="pages" min="1">
                 <div id="edit-form-buttons"> 
-                    <input id="submit-edit-btn" type="submit">
+                    <input id="submit-edit-btn" type="submit" value="Confirm Changes">
                 </div>
             </form>
         </div>
@@ -72,5 +72,6 @@
 <!-- Make the size of the book cards adjust responsively in order to fit
      innerHTML of  it's child p element -->
 
-<!-- Disable page interactivity outside of form when a form is being
-    shown -->
+<!--Edit -> X causes 
+    "An invalid form control with name='title' is not focusable." -->
+
