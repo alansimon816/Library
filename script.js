@@ -163,7 +163,6 @@ function exitDeleteWarning() {
 }
 // Creates a book object and adds a book to the library array 
 function addBookToLibrary(e) {
-    // prevents default browser behavior (page refresh)
     e.preventDefault();
     let title = document.getElementById('title-in').value
     let author = document.getElementById('author-in').value
@@ -196,20 +195,19 @@ function editBookInLibrary(e) {
     exitSelectedBook()
 }
 
-// Creates a div to be associated with a book.
-// Adds a data-attribute for index of book in library to the DOM element.
+// Creates a card to be associated with a book.
+// Adds a data-attribute for index of book in library to the card.
 function createBookDiv(book) {
-    let div = document.createElement('DIV')
-    div.dataset.index = library.indexOf(book)
-    div.className = 'bookCard'
+    let card = document.createElement('DIV')
+    card.dataset.index = library.indexOf(book)
+    card.className = 'bookCard'
     let p = document.createElement('P')
     p.innerHTML = createBookDivText(book)
-    // p.addEventListener('click', showSelected)
-    div.appendChild(p)
-    div.addEventListener('mouseenter', jump)
-    div.addEventListener('mouseleave', land)
-    div.addEventListener('click', showSelectedBook)
-    document.getElementById('flex-box').appendChild(div)
+    card.appendChild(p)
+    card.addEventListener('mouseenter', jump)
+    card.addEventListener('mouseleave', land)
+    card.addEventListener('click', showSelectedBook)
+    document.getElementById('flex-box').appendChild(card)
 }
 
 // Creates a string of inner HTML for a child <p></p> with a
@@ -290,9 +288,95 @@ function allowPointerEvents() {
     selectedBookFlexBox.style.pointerEvents = 'auto'
 }
 
+// Calls the appropriate sorting function to sort the books depending on the
+// value of the dropdown list.
+function sort() {
+    let val = document.getElementById('sort').value
+    if (val === 'title') {
+        sortByTitle()
+    } else if (val === 'author') {
+        sortByAuthor()
+    } else if (val === 'genre') {
+        sortByGenre()
+    } else if (val === 'pages') {
+        sortByPages()
+    } else {
+        sortByCreationDate()
+    }
+}
+
+// Sorts the book cards in alphabetical order based on the title.
+function sortByTitle() {
+    let nodes = document.querySelectorAll('.bookCard')
+    let titles = []
+    nodes.forEach(node => titles.push(library[node.dataset.index].title))
+    console.log(titles)
+    titles.sort()
+    console.log(titles)
+
+    let order
+    nodes.forEach((node) => {
+        console.log(node)
+        order = titles.findIndex(x => x === library[node.dataset.index].title)
+        node.style.order = order
+    }) 
+}
+
+// Sorts the book cards in alphabetical order based on the author.
+function sortByAuthor() {
+    let nodes = document.querySelectorAll('.bookCard')
+    let authors = []
+    nodes.forEach(node => authors.push(library[node.dataset.index].author))
+    authors.sort()
+
+    let order
+    nodes.forEach((node) => {
+        console.log(node)
+        order = authors.findIndex(x => x === library[node.dataset.index].author)
+        node.style.order = order
+    })
+}
+
+// Sorts the book cards in alphabetical order based on the genre.
+function sortByGenre() {
+    let nodes = document.querySelectorAll('.bookCard')
+    let genres = []
+    nodes.forEach(node => genres.push(library[node.dataset.index].genre))
+    genres.sort() 
+
+    let order
+    nodes.forEach((node) => {
+        console.log(node)
+        order = genres.findIndex(x => x === library[node.dataset.index].genre)
+        node.style.order = order
+    })
+}
+
+// Sorts the book cards by number of pages in ascending order.
+function sortByPages() {
+    let nodes = document.querySelectorAll('.bookCard')
+    let lengths = []
+    nodes.forEach(node => lengths.push(library[node.dataset.index].numPages))
+    lengths.sort()
+
+    let order
+    nodes.forEach((node) => {
+        console.log(node)
+        order = lengths.findIndex(x => x === library[node.dataset.index].numPages)
+        node.style.order = order
+    })
+}
+
+// Sorts the book cards by creation date.
+function sortByCreationDate() {
+    let nodes = document.querySelectorAll('.bookCard')
+    nodes.forEach((node) => {
+        node.style.order = 'initial'
+    })
+}
+
 // Stores the information associated with a book (database).
 function storeBookInfo() {
-
 }
 
 // Deletes stored information about the book (database).

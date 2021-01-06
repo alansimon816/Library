@@ -9,7 +9,23 @@
     <body>
         <div id="outermost-div">
             <h1>Library</h1>
-            <button id="new-book-btn">New Book</button>
+            <div id="outermost-div-widgets">
+                <button id="new-book-btn">+</button>
+                <!-- If you need to send the data to the server
+                    or refer to the list with scripts,
+                    the <select> tag should be put inside the 
+                        <form> tag. -->
+                <div>
+                    <label for="sort">Sort by</label>
+                    <select onchange="sort()" id="sort">
+                        <option value="creation">Creation Date (Chronological)</option>
+                        <option value="title">Title (A-Z)</option>
+                        <option value="author">Author (A-Z)</option>
+                        <option value="genre">Genre (A-Z)</option>
+                        <option value="pages">Number of Pages (Ascending)</option>
+                    </select>
+                </div>
+            </div>
             <div id=flex-box>
 
                 <!-- Content -->
