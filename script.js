@@ -357,8 +357,8 @@ function sortByPages() {
     let nodes = document.querySelectorAll('.bookCard')
     let lengths = []
     nodes.forEach(node => lengths.push(library[node.dataset.index].numPages))
-    lengths.sort()
-
+    lengths.sort((a, b) => a - b)
+    console.log(lengths)
     let order
     nodes.forEach((node) => {
         console.log(node)
