@@ -94,8 +94,8 @@ body {
     padding: 1%;
     margin: 5%;
     border: solid;
+    margin-bo
     box-shadow: inset 0 0 100% red;
-
 }
 
 #selected-book {
@@ -140,6 +140,11 @@ body {
 
 #delete-msg {
     padding: 5%;
+}
+
+#outermost-div-widgets {
+    display: flex;
+    justify-content: space-between;
 }
 
 
